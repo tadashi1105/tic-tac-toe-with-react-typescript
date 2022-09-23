@@ -1,6 +1,6 @@
 import { SquareType } from '../types';
 
-export default function calculateWinner(squares: SquareType[]) {
+export default function calculateWinner(squares: SquareType[]): SquareType {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
