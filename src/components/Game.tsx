@@ -4,12 +4,12 @@ import Board from './Board';
 import calculateWinner from '../features/calculateWinner';
 import { SquareType } from '../types';
 
-type HistoryData = {
+type History = {
   squares: SquareType[];
 };
 
 const Game: React.FC = () => {
-  const [history, setHistory] = useState<HistoryData[]>([
+  const [history, setHistory] = useState<History[]>([
     {
       squares: Array(9).fill(null),
     },
@@ -17,9 +17,9 @@ const Game: React.FC = () => {
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
 
-  const handleClick = (i: number) => {
-    const currentHistory = history.slice(0, stepNumber + 1);
-    const current = currentHistory.slice(-1)[0];
+  const handleClick = (i: number): void => {
+    const newHistory = history.slice(0, stepNumber + 1);
+    const current = newHistory.slice(-1)[0];
     const squares = current.squares.slice();
 
     if (calculateWinner(squares) || squares[i]) {
@@ -28,17 +28,17 @@ const Game: React.FC = () => {
 
     squares[i] = xIsNext ? 'X' : 'O';
     setHistory(
-      currentHistory.concat([
+      newHistory.concat([
         {
           squares: squares,
         },
       ])
     );
-    setStepNumber(currentHistory.length);
+    setStepNumber(newHistory.length);
     setXIsNext(!xIsNext);
   };
 
-  const jumpTo = (step: number) => {
+  const jumpTo = (step: number): void => {
     setStepNumber(step);
     setXIsNext(step % 2 === 0);
   };

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ReactNode } from 'react';
 import Square from './Square';
 import { SquareType } from '../types';
 
@@ -8,7 +8,7 @@ type BoardProps = {
 };
 
 const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
-  const renderSquare = (i: number) => {
+  const renderSquare = (i: number): ReactNode => {
     return <Square value={squares[i]} onClick={() => onClick(i)} />;
   };
 
